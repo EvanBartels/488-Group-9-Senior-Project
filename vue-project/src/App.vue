@@ -1,47 +1,32 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <v-app>
+    <v-app-bar app elevation="2" color="secondary" dark>
+      <!-- <v-app-bar-nav-icon @click="toggleSidebar" /> -->
+      <v-app-bar-title>Cocktail Mixer</v-app-bar-title>
+      <v-spacer></v-spacer>
+      <v-menu>
+          <template v-slot:activator="{ props }">
+            <v-btn icon="mdi-hamburger" v-bind="props"></v-btn>
+          </template>
+          <v-list width="200">
+            
+          </v-list>
+      </v-menu> 
+    </v-app-bar>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <v-main>
+      
+      <router-view></router-view>
+    </v-main>
+  </v-app>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+<script>
+export default {
+  methods: {
+    toggleSidebar() {
+      // Implement logic to toggle the sidebar
+    },
+  },
+};
+</script>
