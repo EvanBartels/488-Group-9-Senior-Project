@@ -4,9 +4,11 @@
     <p>Thanks for visiting. Please take a look around.</p>
     <slot name="text"></slot>
   </div>
+  
 </template>
 
 <script>
+
 export default {
   name: 'Home'
 }

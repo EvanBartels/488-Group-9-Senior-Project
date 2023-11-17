@@ -2,6 +2,7 @@
   <v-app>
     <v-app-bar app elevation="2" color="secondary" dark>
       <!-- <v-app-bar-nav-icon @click="toggleSidebar" /> -->
+      <v-icon>mdi-home</v-icon>
       <v-app-bar-title>Cocktail Mixer</v-app-bar-title>
       <v-spacer></v-spacer>
       <v-menu>
@@ -22,6 +23,10 @@
 </template>
 
 <script>
+import { RouterLink, RouterView } from 'vue-router'
+import { useDisplay } from 'vuetify'
+import { reactive } from 'vue'
+import { useTheme } from 'vuetify/lib/framework.mjs'
 export default {
   methods: {
     toggleSidebar() {

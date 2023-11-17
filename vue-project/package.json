@@ -10,6 +10,7 @@
   "dependencies": {
     "vue": "^3.3.4",
     "vue-material-design-icons": "^5.2.0",
+    "vue-router": "^4.2.5",
     "vuetify": "^3.3.23"
   },
   "devDependencies": {
