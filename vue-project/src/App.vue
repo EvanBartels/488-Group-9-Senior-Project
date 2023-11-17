@@ -23,7 +23,7 @@
           </v-list>
       </v-menu> 
     </v-app-bar>
-    
+
     <!-- don't touch-->
     <v-main> 
       <router-view></router-view>
