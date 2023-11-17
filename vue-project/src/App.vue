@@ -2,24 +2,34 @@
   <v-app>
     <v-app-bar app elevation="2" color="secondary" dark>
       <!-- <v-app-bar-nav-icon @click="toggleSidebar" /> -->
-      <v-icon>mdi-home</v-icon>
-      <v-app-bar-title>Cocktail Mixer</v-app-bar-title>
+      <RouterLink to="/">
+      <v-app-bar-title color="white">
+        <v-icon color="white">mdi-glass-cocktail
+        </v-icon>
+        <span style="color:white">Cocktail Mixer</span>
+      </v-app-bar-title>
+    </RouterLink>
       <v-spacer></v-spacer>
       <v-menu>
           <template v-slot:activator="{ props }">
             <v-btn icon="mdi-hamburger" v-bind="props"></v-btn>
           </template>
           <v-list width="200">
-            
+            <v-list-item>
+              <v-list-item-title>
+              <RouterLink to="/hello">Hello</RouterLink>
+            </v-list-item-title>
+            </v-list-item>
           </v-list>
       </v-menu> 
     </v-app-bar>
-
-    <v-main>
-      
+    
+    <!-- don't touch-->
+    <v-main> 
       <router-view></router-view>
     </v-main>
-  </v-app>
+ 
+ </v-app>
 </template>
 
 <script>
