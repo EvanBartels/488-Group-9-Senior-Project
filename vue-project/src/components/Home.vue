@@ -1,7 +1,15 @@
 <template>
   <div>
-    <h1>Welcome to my website!</h1>
-    <p>Thanks for visiting. Please take a look around.</p>
+    <h1><i>Welcome to your online Cocktail Mixer!</i></h1>
+    <img src="/relaxing-cocktails.jpg" alt="cocktail" class="responsive-image">
+    <p>You are just moments away from creating your own mixed drink! You can either
+      <router-link to="/register"> sign-up here </router-link>
+      or 
+      <router-link to="/drink-creation"> create a drink now. </router-link>
+    </p>
+    <p>Returning user? 
+      <router-link to="/login"> Login here!</router-link>
+    </p>
     <slot name="text"></slot>
   </div>
   
@@ -14,16 +22,27 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.responsive-image {
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  border-radius: 20px;
+}
 h1 {
   font-size: 3rem;
   text-align: center;
   margin-top: 2rem;
+  font-family: Verdana, sans-serif;
 }
 
 p {
   font-size: 1.5rem;
   text-align: center;
   margin-top: 1rem;
+  font-family: sans-serif;
 }
 </style>
