@@ -17,8 +17,23 @@
           <v-list width="200">
             <v-list-item>
               <v-list-item-title>
-              <RouterLink to="/hello">Hello</RouterLink>
+              <RouterLink to="/">Home</RouterLink>
             </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+              <RouterLink to="/about">About</RouterLink>
+            </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+              <RouterLink to="/register">Sign-Up</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+              <RouterLink to="/login">Sign-In</RouterLink>
+              </v-list-item-title>
             </v-list-item>
           </v-list>
       </v-menu> 
