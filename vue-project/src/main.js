@@ -33,12 +33,19 @@ const vuetify = createVuetify({
         colors: {
           primary: '#1B262C',
           secondary: '#0F4C75',
-          tertiary: '#0F4C75',
+          tertiary: '#3282B8',
           altColor: '#BBE1FA'
         }
       }
     }
-  }
+  },
+  defaults: {
+    VBtn: {
+      color: 'tertiary',
+      variant: 'outlined',
+      elevation: 10,
+    },
+  },
 })
 const app = createApp(App)
 

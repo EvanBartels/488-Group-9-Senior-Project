@@ -4,7 +4,7 @@
       <!-- <v-app-bar-nav-icon @click="toggleSidebar" /> -->
       <RouterLink to="/">
       <v-app-bar-title color="white">
-        <v-icon color="white">mdi-glass-cocktail
+        <v-icon color="altColor">mdi-glass-cocktail
         </v-icon>
         <span style="color:white">Cocktail Mixer</span>
       </v-app-bar-title>
@@ -12,7 +12,7 @@
       <v-spacer></v-spacer>
       <v-menu>
           <template v-slot:activator="{ props }">
-            <v-btn icon="mdi-hamburger" v-bind="props"></v-btn>
+            <v-btn color='altColor' icon="mdi-hamburger" v-bind="props"></v-btn>
           </template>
           <v-list width="200">
             <v-list-item>
