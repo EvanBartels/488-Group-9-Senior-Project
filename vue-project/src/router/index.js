@@ -4,6 +4,7 @@ import HelloWorld from '@/views/HelloWorld.vue'
 import AboutView from '@/views/AboutView.vue'
 import DrinkCreationView from '@/views/DrinkCreationView.vue'
 import LoginView from '@/views/LoginView.vue'
+import IngredientSelector from '@/components/IngredientSelector.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,6 +35,11 @@ const router = createRouter({
             path: '/login',
             name: 'LoginView',
             component: LoginView
+        },
+        {
+            path: '/experimental',
+            name: 'IngredientSelector',
+            component: IngredientSelector
         }
     ]
   })
