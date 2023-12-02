@@ -52,3 +52,20 @@ const app = createApp(App)
 app.use(vuetify)
 app.use(router)
 app.mount('#app')
+
+//AddItem Function
+/*function addItem() {
+  const itemList = document.getElementById("itemList");
+  const newItem = document.createElement("href");
+  newItem.textContent = "New Item";
+  itemList.appendChild(newItem);
+}
+
+
+//RemoveItem Function
+function removeItem() {
+  const itemLists = document.getElementById("item-lists");
+  if(itemLists.children.length > 0) {
+    itemLists.removeChild(itemLists.lastChild);
+  }
+}*/
