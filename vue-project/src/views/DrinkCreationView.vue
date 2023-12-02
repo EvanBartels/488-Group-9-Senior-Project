@@ -4,4 +4,18 @@
     <div class="d-flex align-center justify-center">
         
         </div> 
+        <br>
+        <div>
+<IngredientSelector></IngredientSelector>
+    </div>
+
 </template>
+
+<script>
+import IngredientSelector from '../components/IngredientSelector.vue';
+export default {
+    components: {
+        IngredientSelector
+    }
+}
+</script>
