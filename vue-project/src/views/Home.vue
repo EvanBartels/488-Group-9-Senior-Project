@@ -6,7 +6,7 @@
       <v-btn @click="$router.push('/drink-creation')" variant="outlined"   class="text-h6" elevation=10 style="min-height: 60px; min-width: 200px; border-width: 1.5px;" >Create Drink <v-icon> mdi-glass-cocktail</v-icon></v-btn>
     </p>
     <p>You are just moments away from creating your own mixed drink! You can either
-      <router-link to="/register"> sign-up here </router-link>
+      <router-link to="/sign-up"> sign-up here </router-link>
       or 
       <router-link to="/drink-creation"> create a drink now. </router-link>
     </p>

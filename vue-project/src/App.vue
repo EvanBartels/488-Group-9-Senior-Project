@@ -27,7 +27,7 @@
             </v-list-item>
             <v-list-item>
               <v-list-item-title>
-              <RouterLink to="/register">Sign-Up</RouterLink>
+              <RouterLink to="/sign-up">Sign-Up</RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>

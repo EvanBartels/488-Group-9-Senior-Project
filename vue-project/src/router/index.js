@@ -4,6 +4,7 @@ import HelloWorld from '@/views/HelloWorld.vue'
 import AboutView from '@/views/AboutView.vue'
 import DrinkCreationView from '@/views/DrinkCreationView.vue'
 import LoginView from '@/views/LoginView.vue'
+import SignUpView from '@/views/SignUpView.vue'
 import IngredientSelector from '@/components/IngredientSelector.vue'
 
 const router = createRouter({
@@ -40,6 +41,11 @@ const router = createRouter({
             path: '/experimental',
             name: 'IngredientSelector',
             component: IngredientSelector
+        },
+        {
+            path: '/sign-up',
+            name: 'SignUpView',
+            component: SignUpView
         }
     ]
   })
