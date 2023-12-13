@@ -58,22 +58,25 @@
         ],
         selectedIngredients: [],
         matchingDrinks: [],
-        vodkaCranberryIngredientList: ["Vodka", "Cranberry Juice"],
+        vodkaCranberryIngredientList: [{title: "Vodka" }, {title: "Cranberry Juice"}],
       }),
         methods: {
             selectIngredient(ingredient) {
               this.selectedIngredients.push(ingredient);
             },
             // This will be a demo of the basics of how ingredient search will work
+            // The likely end solution I'm thinking of will this will call from an API
+            // and all the actual logic regarding drink search will be done on the backend in C#
             searchDrinksDemo() {
               this.matchingDrinks = [];
+              let myIngredients = [];
+              for (let i = 0; i < this.selectedIngredients.length; i++) {
+                myIngredients.push(this.selectedIngredients[i].title);
+              }
               let drinkMatch = true;
-              for (const i in this.vodkaCranberryIngredientList) {
-                const ingredient = this.vodkaCranberryIngredientList[i];
-                if (this.selectedIngredients.includes(ingredient)) {
-                  continue;
-                } 
-                else {
+              for (let i = 0; i < this.vodkaCranberryIngredientList.length; i++) {
+                let ingredient = this.vodkaCranberryIngredientList[i].title;
+                if (myIngredients.includes(ingredient) == false) {                
                   drinkMatch = false;
                   break;
                 }
