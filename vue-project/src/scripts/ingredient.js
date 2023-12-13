@@ -1,8 +1,8 @@
 export class Ingredient {
-    constructor(ingredientName, amount, ratio?)
+    constructor(ingredientName, amount)
     {
         this.ingredientName = ingredientName;
         this.amount = amount;
-        this.ratio = ratio;
+        
     }
 }

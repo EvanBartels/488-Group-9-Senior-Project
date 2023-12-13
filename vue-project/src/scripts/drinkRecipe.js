@@ -1,7 +1,7 @@
 export class DrinkRecipe {
     constructor(drinkName, ingredients, abv = 0)
     {
-        this.name = name;
+        this.drinkName = drinkName;
         this.ingredients = ingredients;
         this.abv = abv;
     }
