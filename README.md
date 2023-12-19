@@ -3,9 +3,9 @@ EWU Fall 2023/Winter 2024 Senior Project on Drink Website
 
 
 # Team Members
-Evan Bartels
-Michael Moran
-Travis Ho
+Evan Bartels,
+Michael Moran,
+Travis Ho,
 Carter Hosking
 
 # Requirements
