@@ -46,8 +46,22 @@
       </v-card>
     </div>
     </div>
+    <div>
+      <v-btn @click="getIngredients()">Get Ingredients</v-btn>
+      <v-card class="mx-auto" max-width="500">
+       <v-list disabled>
+       <v-list-subheader>apiIngredients</v-list-subheader>
+       <v-list-item v-for="(item, index) in apiIngredients" :key="index">
+        <v-list-item-title v-text="item.ingredientName"></v-list-item-title>
+        </v-list-item>
+       </v-list>
+      </v-card>
+      </div>
   </template>
+  
   <script>
+    import axios from 'axios';
+    const API_URL = 'http://localhost:5019/'; // will need to change to azure url
     export default {
       data: () => ({
         items: [
@@ -59,6 +73,7 @@
         selectedIngredients: [],
         matchingDrinks: [],
         vodkaCranberryIngredientList: [{title: "Vodka" }, {title: "Cranberry Juice"}],
+        apiIngredients: [],
       }),
         methods: {
             selectIngredient(ingredient) {
@@ -84,6 +99,11 @@
               if (drinkMatch) {
                 this.matchingDrinks.push({title: "Vodka Cranberry"});
               }
+            },
+            async getIngredients() { //this method works functionally
+              axios.get(API_URL + 'api/DrinkRecipe/GetIngredients').then(response => {
+                this.apiIngredients = response.data;
+              })
             }
         },
     }
