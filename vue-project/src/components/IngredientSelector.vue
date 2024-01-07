@@ -48,6 +48,8 @@
     </div>
   </template>
   <script>
+    import axios from 'axios'
+    const API_URL = "http://localhost:5019/"; //TODO azure web service url
     export default {
       data: () => ({
         items: [
@@ -60,7 +62,10 @@
         matchingDrinks: [],
         vodkaCranberryIngredientList: [{title: "Vodka" }, {title: "Cranberry Juice"}],
       }),
-        methods: {
+      mounted() {
+        this.getIngredients();
+      },
+      methods: {
             selectIngredient(ingredient) {
               this.selectedIngredients.push(ingredient);
             },
@@ -84,7 +89,13 @@
               if (drinkMatch) {
                 this.matchingDrinks.push({title: "Vodka Cranberry"});
               }
-            }
+            },
+            // getIngredients() {
+            //   axios.get(API_URL + "api/DrinkRecipe/GetIngredients").then(response => {
+            //     this.items = response.data;
+            //   });
+              
+            // }
         },
     }
   </script>
