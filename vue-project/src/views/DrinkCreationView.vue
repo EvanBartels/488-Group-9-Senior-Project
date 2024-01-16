@@ -8,14 +8,25 @@
         <div>
 <IngredientSelector></IngredientSelector>
     </div>
+    <br>
+    <div>
+<FooterFile></FooterFile>
+    </div>
 
 </template>
 
 <script>
 import IngredientSelector from '../components/IngredientSelector.vue';
+import FooterFile from '../components/FooterFile.vue'; 
 export default {
     components: {
-        IngredientSelector
+        IngredientSelector,
+        FooterFile
     }
 }
+
+
+
+
+
 </script>

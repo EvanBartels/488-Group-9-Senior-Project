@@ -6,6 +6,7 @@ import DrinkCreationView from '@/views/DrinkCreationView.vue'
 import LoginView from '@/views/LoginView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import IngredientSelector from '@/components/IngredientSelector.vue'
+import FooterFile from '@/components/FooterFile.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -46,6 +47,11 @@ const router = createRouter({
             path: '/sign-up',
             name: 'SignUpView',
             component: SignUpView
+        },
+        {
+            path: '/Footer',
+            name: 'FooterFile',
+            component: FooterFile
         }
     ]
   })
