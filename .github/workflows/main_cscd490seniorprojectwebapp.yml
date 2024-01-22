@@ -23,15 +23,18 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
+        working-directory: ./api/CSCD490SeniorProjectApi
         run: dotnet build --configuration Release
 
       - name: dotnet publish
+        working-directory: ./api/CSCD490SeniorProjectApi
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
+          working-directory: ./api/CSCD490SeniorProjectApi
           path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
