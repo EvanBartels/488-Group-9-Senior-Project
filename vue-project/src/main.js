@@ -7,6 +7,10 @@ import router from './router'
 import './assets/main.css'
 import '@mdi/font/css/materialdesignicons.css'
 
+//Firebase
+import store from './store'
+//const firebase = require('./firebaseConfig.js')
+
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
@@ -51,6 +55,7 @@ const app = createApp(App)
 
 app.use(vuetify)
 app.use(router)
+app.use(store)
 app.mount('#app')
 
 //AddItem Function
