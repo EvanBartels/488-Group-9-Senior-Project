@@ -6,6 +6,7 @@
             <div v-if="user.loggedIn">
   
             <div class="card-header">Welcome, {{user.data.displayName}}</div>
+            <div class="card-header">Current email: {{user.data.email}}</div>
             <div class="card-body">
               <div class="alert alert-success" role="alert">
               You are logged in!
