@@ -7,6 +7,7 @@ import LoginView from '@/views/LoginView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import IngredientSelector from '@/components/IngredientSelector.vue'
 import Dashboard from '@/views/UserDashboardView.vue'
+import UserSettings from '@/views/UserSettingsView.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,6 +53,11 @@ const router = createRouter({
             path: '/Dashboard',
             name: 'Dashboard',
             component: Dashboard
+        },
+        {
+            path: '/UserSettings',
+            name: 'UserSettings',
+            component: UserSettings
         }
     ]
   })

@@ -15,24 +15,46 @@
             <v-btn color='altColor' icon="mdi-hamburger" v-bind="props"></v-btn>
           </template>
           <v-list width="200">
-            <v-list-item>
+
+            <v-list-item v-if="!user.loggedIn">
               <v-list-item-title>
               <RouterLink to="/">Home</RouterLink>
-            </v-list-item-title>
+              </v-list-item-title>
             </v-list-item>
+
             <v-list-item>
               <v-list-item-title>
               <RouterLink to="/about">About</RouterLink>
-            </v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-title>
-              <RouterLink to="/sign-up">Sign-Up</RouterLink>
               </v-list-item-title>
             </v-list-item>
-            <v-list-item>
+
+            <v-list-item  v-if="user.loggedIn">
               <v-list-item-title>
-              <RouterLink to="/login">Sign-In</RouterLink>
+              <RouterLink to="/Dashboard">Dashboard</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+
+            <v-list-item v-if="user.loggedIn">
+              <v-list-item-title>
+                <RouterLink to="/UserSettings">Settings</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+            
+            <v-list-item  v-if="user.loggedIn">
+              <v-list-item-title @click.prevent="signOut">
+                <RouterLink to="/">Log Out</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+
+            <v-list-item v-if="!user.loggedIn">
+              <v-list-item-title>
+              <RouterLink to="/sign-up">Register</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+
+            <v-list-item v-if="!user.loggedIn">
+              <v-list-item-title>
+              <RouterLink to="/login">Login</RouterLink>
               </v-list-item-title>
             </v-list-item>
           </v-list>
@@ -52,7 +74,35 @@ import { RouterLink, RouterView } from 'vue-router'
 import { useDisplay } from 'vuetify'
 import { reactive } from 'vue'
 import { useTheme } from 'vuetify/lib/framework.mjs'
+
+import { useStore} from "vuex"
+import { useRouter } from "vue-router"
+import {computed} from "vue"
+import { auth } from './firebaseConfig'
+
 export default {
+  name: 'App',
+  setup() {
+  
+  const store = useStore()
+  const router = useRouter()
+
+  auth.onAuthStateChanged(user => {
+    store.dispatch("fetchUser", user);
+  });
+
+  const user = computed(() => {
+    return store.getters.user;
+  });
+
+  const signOut = async () => {
+          await store.dispatch('logOut')
+          router.push('/')
+  }
+
+    return {user, signOut}
+ },
+
   methods: {
     toggleSidebar() {
       // Implement logic to toggle the sidebar
