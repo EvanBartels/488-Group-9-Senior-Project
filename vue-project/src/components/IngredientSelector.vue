@@ -19,7 +19,7 @@
             :key="index"
             @click="selectIngredient(item)"
           >
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>{{ item.ingredientName }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -28,19 +28,18 @@
        <v-list disabled>
        <v-list-subheader>Selected Ingredients</v-list-subheader>
        <v-list-item v-for="(item, index) in selectedIngredients" :key="index">
-        <v-list-item-title v-text="item.title"></v-list-item-title>
+        <v-list-item-title v-text="item.ingredientName"></v-list-item-title>
         </v-list-item>
        </v-list>
       </v-card>
       <v-btn @click="searchDrinksDemo(selectedIngredients, vodkaCranberryIngredientList)">Search Drinks</v-btn>
-      <!-- <p>Selected Ingredients: {{ selectedIngredients}}</p> -->
     </div>
     <div>
       <v-card class="mx-auto" max-width="500">
        <v-list disabled>
        <v-list-subheader>Drink Results</v-list-subheader>
        <v-list-item v-for="(item, index) in matchingDrinks" :key="index">
-        <v-list-item-title v-text="item.title"></v-list-item-title>
+        <v-list-item-title v-text="item.drinkName"></v-list-item-title>
         </v-list-item>
        </v-list>
       </v-card>
@@ -49,18 +48,13 @@
   </template>
   <script>
     import axios from 'axios'
-    const API_URL = "http://localhost:5019/"; //TODO azure web service url
+    // const API_URL = "http://localhost:5019/"; //TODO azure web service url
     export default {
       data: () => ({
-        items: [
-          { title: 'Vodka' },
-          { title: 'Lime Juice' },
-          { title: 'Cranberry Juice' },
-          { title: 'Tequila' },
-        ],
+        items: [],
         selectedIngredients: [],
         matchingDrinks: [],
-        vodkaCranberryIngredientList: [{title: "Vodka" }, {title: "Cranberry Juice"}],
+        vodkaCranberryIngredientList: [{ingredientName: "Vodka" }, {ingredientName: "Cranberry Juice"}],
       }),
       mounted() {
         this.getIngredients();
@@ -76,26 +70,26 @@
               this.matchingDrinks = [];
               let myIngredients = [];
               for (let i = 0; i < this.selectedIngredients.length; i++) {
-                myIngredients.push(this.selectedIngredients[i].title);
+                myIngredients.push(this.selectedIngredients[i].ingredientName);
               }
               let drinkMatch = true;
               for (let i = 0; i < this.vodkaCranberryIngredientList.length; i++) {
-                let ingredient = this.vodkaCranberryIngredientList[i].title;
+                let ingredient = this.vodkaCranberryIngredientList[i].ingredientName;
                 if (myIngredients.includes(ingredient) == false) {                
                   drinkMatch = false;
                   break;
                 }
               }
               if (drinkMatch) {
-                this.matchingDrinks.push({title: "Vodka Cranberry"});
+                this.matchingDrinks.push({drinkName: "Vodka Cranberry"});
               }
             },
-            // getIngredients() {
-            //   axios.get(API_URL + "api/DrinkRecipe/GetIngredients").then(response => {
-            //     this.items = response.data;
-            //   });
+            getIngredients() {
+              axios.get("api/DrinkRecipe/GetIngredients").then(response => {
+                this.items = response.data;
+              });
               
-            // }
+            }
         },
     }
   </script>

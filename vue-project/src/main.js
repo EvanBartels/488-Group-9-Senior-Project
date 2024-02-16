@@ -3,6 +3,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { mdi } from 'vuetify/iconsets/mdi'
 import router from './router'
+import Axios from 'axios'
 
 import './assets/main.css'
 import '@mdi/font/css/materialdesignicons.css'
@@ -17,7 +18,12 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
-
+//Check if the app running on localhost
+if (window.location.hostname === 'localhost') {
+  Axios.defaults.baseURL = 'https://localhost:5019/' // Change with https://cscd490seniorprojectwebapp.azurewebsites.net/ if needed
+} else {
+  Axios.defaults.baseURL = 'https://cscd490seniorprojectwebapp.azurewebsites.net/'
+}
 
 // Provide the useDisplay to other components so that it can be used in testing.
 
