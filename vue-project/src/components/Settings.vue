@@ -4,7 +4,7 @@
         <div class="col-md-8">
           <div class="card">
             <div class="card-header">Change your displayed name if you desire.</div>
-            <div class="card-body">
+            <div style="margin-bottom: 20px;" class="card-body">
               <div v-if="error" class="alert alert-danger">{{error}}</div>
               <form action="#"  @submit.prevent="ChangeName">
                 <div class="form-group row">
@@ -27,6 +27,21 @@
                 <div class="form-group row mb-0">
                   <div class="col-md-8 offset-md-4">
                     <button type="submit" class="btn btn-primary">Change Name</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div>
+
+
+            </div>
+            <div class="card-header"><strong>Delete Your Account</strong></div>
+            <div class="card-body">
+              <div v-if="error" class="alert alert-danger">{{error}}</div>
+              <form action="#"  @submit.prevent="DeleteUser">
+                <div class="form-group row mb-0">
+                  <div class="col-md-8 offset-md-4">
+                    <button type="submit" class="btn btn-primary">Delete Account</button>
                   </div>
                 </div>
               </form>
@@ -59,7 +74,17 @@
           error.value = err.message
         }
       }
-      return {name, error, ChangeName}
+
+      const DeleteUser = async () => {
+        try {
+          await store.dispatch('DeleteUser')
+          router.push('/')
+        } catch (err) {
+          error.value = err.message
+        }
+      }
+
+      return {name, error, ChangeName, DeleteUser}
     }
   };
   </script>
