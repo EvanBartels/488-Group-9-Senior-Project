@@ -20,7 +20,7 @@ import * as directives from 'vuetify/directives'
 
 //Check if the app running on localhost
 if (window.location.hostname === 'localhost') {
-  Axios.defaults.baseURL = 'https://localhost:5019/' // Change with https://cscd490seniorprojectwebapp.azurewebsites.net/ if needed
+  Axios.defaults.baseURL = 'http://localhost:5019/' // Change with https://cscd490seniorprojectwebapp.azurewebsites.net/ if needed
 } else {
   Axios.defaults.baseURL = 'https://cscd490seniorprojectwebapp.azurewebsites.net/'
 }

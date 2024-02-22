@@ -37,5 +37,26 @@ namespace CSCD490SeniorProjectApi.Controllers
             }
             return new JsonResult(dataTable);
         }
+        [HttpGet]
+        [Route("GetDrinkFromIngredients")]
+        public JsonResult DrinkFromIngredients(string ingredients)
+        {
+            string query = "select distinct drinkName from dbo.drinkRecipes where ingredientName in " + ingredients;
+            DataTable dataTable = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    dataTable.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return new JsonResult(dataTable);
+        }
     }
 }
