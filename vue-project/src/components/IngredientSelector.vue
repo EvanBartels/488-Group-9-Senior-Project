@@ -1,4 +1,12 @@
 <template>
+  
+<div class="card">
+  <div v-if="user.loggedIn">
+    <div class="card-body">
+      <div class="card-header" style="text-align: center">{{user.data.displayName}} is making a drink!</div>
+    </div>
+  </div>
+</div>
     
     <div class="text-center">
       <v-menu
@@ -49,7 +57,37 @@
   <script>
     import axios from 'axios'
     // const API_URL = "http://localhost:5019/"; //TODO azure web service url
+
+    import { useStore} from "vuex";
+    import { useRouter } from "vue-router";
+    import {computed} from "vue";
+    import { auth } from '../firebaseConfig'
+
     export default {
+
+      name: "DashboardComponent",
+  
+  setup() {
+
+  const store = useStore()
+  const router = useRouter()
+
+  auth.onAuthStateChanged(user => {
+    store.dispatch("fetchUser", user);
+  });
+
+  const user = computed(() => {
+    return store.getters.user;
+  });
+
+  const signOut = async () => {
+        await store.dispatch('logOut')
+        router.push('/')
+  }
+
+    return {user,signOut}
+  },
+
       data: () => ({
         items: [],
         selectedIngredients: [],
