@@ -2,13 +2,22 @@
   <v-app>
     <v-app-bar app elevation="2" color="secondary" dark>
       <!-- <v-app-bar-nav-icon @click="toggleSidebar" /> -->
-      <RouterLink to="/">
+      <RouterLink v-if="!user.loggedIn" to="/">
       <v-app-bar-title color="white">
         <v-icon color="altColor">mdi-glass-cocktail
         </v-icon>
         <span style="color:white">Cocktail Mixer</span>
       </v-app-bar-title>
-    </RouterLink>
+      </RouterLink>
+      
+      <RouterLink v-if="user.loggedIn" to="/Dashboard">
+      <v-app-bar-title color="white">
+        <v-icon color="altColor">mdi-glass-cocktail
+        </v-icon>
+        <span style="color:white">Cocktail Mixer</span>
+      </v-app-bar-title>
+      </RouterLink>
+
       <v-spacer></v-spacer>
       <v-menu>
           <template v-slot:activator="{ props }">

@@ -1,27 +1,30 @@
-<template>
+  <template>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-8">
+
           <div class="card">
             <div v-if="user.loggedIn">
-  
-            <div class="card-header">Welcome, {{user.data.displayName}}</div>
-            <div class="card-header">Current email: {{user.data.email}}</div>
-            <div class="card-body">
-              <div class="alert alert-success" role="alert">
-              You are logged in!
-              <div class="my-4">
-                    <button  @click.prevent="signOut" class="btn btn-primary">Log Out</button>
+              <div class="card-header">Welcome, {{user.data.displayName}}</div>
+              <div class="card-header">Current email: {{user.data.email}}</div>
+              <div class="card-body">
+                <div class="alert alert-success" role="alert">
+                  You are logged in!
+                  <p>
+                    <v-btn @click="$router.push('/drink-creation')" variant="outlined"   class="text-h6" elevation=10 style="min-height: 60px; min-width: 200px; border-width: 1.5px;" >Create Drink <v-icon> mdi-glass-cocktail</v-icon></v-btn>
+                  </p>
+                    <div class="my-4">
+                      <v-btn  @click.prevent="signOut" class="btn btn-primary">Log Out</v-btn>
+                    </div>
+                </div>
               </div>
-               </div>
             </div>
-  
+            <div v-else class="alert alert-danger" role="alert">
+              You are not logged in! 
             </div>
-              <div v-else class="alert alert-danger" role="alert">
-                You are not logged in! 
-              </div>
           </div>
         </div>
+        
       </div>
     </div>
   </template>

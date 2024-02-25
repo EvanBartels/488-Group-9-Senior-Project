@@ -26,7 +26,7 @@
   
                 <div class="form-group row mb-0">
                   <div class="col-md-8 offset-md-4">
-                    <button type="submit" class="btn btn-primary">Change Name</button>
+                    <v-btn type="submit" class="btn btn-primary">Change Name</v-btn>
                   </div>
                 </div>
               </form>
@@ -35,13 +35,13 @@
 
 
             </div>
-            <div class="card-header"><strong>Delete Your Account</strong></div>
+            <div class="card-header"><strong>Delete Your Account: The button below will delete your account. Once pressed all your information will be removed from this site.</strong></div>
             <div class="card-body">
               <div v-if="error" class="alert alert-danger">{{error}}</div>
               <form action="#"  @submit.prevent="DeleteUser">
                 <div class="form-group row mb-0">
                   <div class="col-md-8 offset-md-4">
-                    <button type="submit" class="btn btn-primary">Delete Account</button>
+                    <v-btn type="submit" class="btn btn-primary">Delete Account</v-btn>
                   </div>
                 </div>
               </form>
@@ -88,3 +88,12 @@
     }
   };
   </script>
+
+<style scoped>
+  input {
+    width: 50%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+  }
+</style>
