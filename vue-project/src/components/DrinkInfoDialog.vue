@@ -50,8 +50,20 @@
                 this.drinkInfo = response.data; //TODO: Carter, this response.data is a JSON with ingredient name, ratio, and abv, display it on the popup please
             });
             },
-            addFavoriteDrink() {
-                
+            addFavoriteDrink() { //TODO FIX THIS
+                if (this.userEmail == "No User Logged In") {
+                    console.log("No user logged in");
+                }
+                else {
+                    axios.put('/api/FavoriteDrink/AddFavoriteDrink',{
+                        params: {
+                            userEmail: this.userEmail,
+                            drinkName: this.drinkName
+                        }
+                    }).then(response => {
+                        console.log("Drink added to favorites");
+                    });
+                }
             }
 
             

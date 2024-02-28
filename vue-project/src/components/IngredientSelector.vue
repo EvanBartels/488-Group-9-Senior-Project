@@ -33,7 +33,7 @@
       </v-menu>
       <div>
     <v-card class="mx-auto" max-width="500">
-       <v-list disabled>
+       <v-list disabled> <!--TODO: Carter or Travis, enable this v-list, make a @click call on the v-list-item to call a method that removes the ingredient from the list-->
        <v-list-subheader>Selected Ingredients</v-list-subheader>
        <v-list-item v-for="(item, index) in selectedIngredients" :key="index">
         <v-list-item-title v-text="item.ingredientName"></v-list-item-title>
@@ -53,7 +53,7 @@
       </v-card>
     </div>
     </div>
-    <DrinkInfoDialog v-if="isDialogOpen" :drinkName="selectedDrink" @close="closeDrinkInfoDialog" />
+    <DrinkInfoDialog v-if="isDialogOpen" :drinkName="selectedDrink" :userEmail="userEmail" @close="closeDrinkInfoDialog" />
   </template>
   <script>
     import axios from 'axios'
@@ -99,11 +99,13 @@
         matchingDrinks: [],
         isDialogOpen: false,
         selectedDrink: "",
-        drinkInfo: []
+        drinkInfo: [],
+        userEmail: ""
       }),
       mounted() {
         this.getIngredients();
       },
+      
       methods: {
         getDrinkInfo(drinkName) {
             axios.get('/api/DrinkRecipe/GetDrinkRecipe', {
@@ -117,8 +119,14 @@
         showDrinkInfoDialog(drinkName) {
             this.selectedDrink = drinkName;
             console.log(this.selectedDrink);
+            try {
+              this.userEmail = auth.currentUser.email;
+            }
+            catch (error) {
+              this.userEmail = "No User Logged In";
+            }
+            console.log(this.userEmail);
             this.isDialogOpen = true;
-            this.getDrinkInfo(drinkName);
           },
         logWorking() {
               console.log("working");
