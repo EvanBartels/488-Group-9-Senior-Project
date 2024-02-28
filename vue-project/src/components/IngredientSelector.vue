@@ -44,15 +44,16 @@
     </div>
     <div>
       <v-card class="mx-auto" max-width="500">
-       <v-list disabled>
+       <v-list enabled>
        <v-list-subheader>Drink Results</v-list-subheader>
-       <v-list-item v-for="(item, index) in matchingDrinks" :key="index">
+       <v-list-item v-for="(item, index) in matchingDrinks" :key="index" @click="showDrinkInfoDialog(item.drinkName)">
         <v-list-item-title v-text="item.drinkName"></v-list-item-title>
         </v-list-item>
        </v-list>
       </v-card>
     </div>
     </div>
+    <DrinkInfoDialog v-if="isDialogOpen" :drinkName="selectedDrink" @close="closeDrinkInfoDialog" />
   </template>
   <script>
     import axios from 'axios'
@@ -62,10 +63,14 @@
     import { useRouter } from "vue-router";
     import {computed} from "vue";
     import { auth } from '../firebaseConfig'
+    import DrinkInfoDialog from './DrinkInfoDialog.vue';
 
     export default {
 
       name: "DashboardComponent",
+      components: {
+        DrinkInfoDialog
+      },
   
   setup() {
 
@@ -85,49 +90,52 @@
         router.push('/')
   }
 
-    return {user,signOut}
-  },
+  return {user,signOut}
+},
 
       data: () => ({
         items: [],
         selectedIngredients: [],
         matchingDrinks: [],
-        vodkaCranberryIngredientList: [{ingredientName: "Vodka" }, {ingredientName: "Cranberry Juice"}],
+        isDialogOpen: false,
+        selectedDrink: "",
+        drinkInfo: []
       }),
       mounted() {
         this.getIngredients();
       },
       methods: {
+        getDrinkInfo(drinkName) {
+            axios.get('/api/DrinkRecipe/GetDrinkRecipe', {
+                params: {
+                    drinkName: drinkName
+                }
+            }).then(response => {
+                this.drinkInfo = response.data;
+            });
+          },
+        showDrinkInfoDialog(drinkName) {
+            this.selectedDrink = drinkName;
+            console.log(this.selectedDrink);
+            this.isDialogOpen = true;
+            this.getDrinkInfo(drinkName);
+          },
+        logWorking() {
+              console.log("working");
+            },
             selectIngredient(ingredient) {
               this.selectedIngredients.push(ingredient);
             },
-            // This will be a demo of the basics of how ingredient search will work
-            // The likely end solution I'm thinking of will this will call from an API
-            // and all the actual logic regarding drink search will be done on the backend in C#
-            // searchDrinksDemo() {
-            //   this.matchingDrinks = [];
-            //   let myIngredients = [];
-            //   for (let i = 0; i < this.selectedIngredients.length; i++) {
-            //     myIngredients.push(this.selectedIngredients[i].ingredientName);
-            //   }
-            //   let drinkMatch = true;
-            //   for (let i = 0; i < this.vodkaCranberryIngredientList.length; i++) {
-            //     let ingredient = this.vodkaCranberryIngredientList[i].ingredientName;
-            //     if (myIngredients.includes(ingredient) == false) {                
-            //       drinkMatch = false;
-            //       break;
-            //     }
-            //   }
-            //   if (drinkMatch) {
-            //     this.matchingDrinks.push({drinkName: "Vodka Cranberry"});
-            //   }
-            // },
+            closeDrinkInfoDialog() {
+              this.isDialogOpen = false;
+            },
             getIngredients() {
               axios.get("api/DrinkRecipe/GetIngredients").then(response => {
                 this.items = response.data;
               });
               
             },
+
             getDrinksFromIngredients() {
               let ingredientsList = "(";
               for (let i = 0; i < this.selectedIngredients.length; i++) {
@@ -146,7 +154,7 @@
                 this.matchingDrinks = response.data;
                 console.log(response.data);
               });
-            }
+            },
         },
     }
   </script>

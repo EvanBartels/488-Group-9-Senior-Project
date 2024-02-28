@@ -13,9 +13,11 @@
 
 <script>
 import IngredientSelector from '../components/IngredientSelector.vue';
+import DrinkInfoDialog from '../components/DrinkInfoDialog.vue';
 export default {
     components: {
-        IngredientSelector
+        IngredientSelector,
+        DrinkInfoDialog
     }
 }
 </script>

@@ -8,6 +8,7 @@ import SignUpView from '@/views/SignUpView.vue'
 import IngredientSelector from '@/components/IngredientSelector.vue'
 import Dashboard from '@/views/UserDashboardView.vue'
 import UserSettings from '@/views/UserSettingsView.vue'
+import DrinkInfoDialog from '@/components/DrinkInfoDialog.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,8 +42,8 @@ const router = createRouter({
         },
         {
             path: '/experimental',
-            name: 'IngredientSelector',
-            component: IngredientSelector
+            name: 'DrinkInfoDialog',
+            component: DrinkInfoDialog
         },
         {
             path: '/sign-up',
