@@ -16,7 +16,7 @@
                     </v-list-item>
                     </v-list>
             </slot>
-            <v-btn>Add Favorite</v-btn>
+            <v-btn @click="addFavoriteDrink(userEmail, drinkName)">Add Favorite</v-btn> <!--This should not show up for those not logged in-->
         </section>
         </v-card>
     </div>
@@ -50,19 +50,23 @@
                 this.drinkInfo = response.data; //TODO: Carter, this response.data is a JSON with ingredient name, ratio, and abv, display it on the popup please
             });
             },
-            addFavoriteDrink() { //TODO FIX THIS
-                if (this.userEmail == "No User Logged In") {
+            addFavoriteDrink(userEmail, drinkName) { //TODO FIX THIS
+                console.log(userEmail)
+                if (userEmail == "No User Logged In") {
                     console.log("No user logged in");
                 }
                 else {
-                    axios.put('/api/FavoriteDrink/AddFavoriteDrink',{
+                    axios.get('/api/FavoriteDrink/AddFavoriteDrink',{
                         params: {
-                            userEmail: this.userEmail,
-                            drinkName: this.drinkName
+                            drinkName: drinkName,
+                            userEmail: userEmail
                         }
                     }).then(response => {
                         console.log("Drink added to favorites");
-                    });
+                    })
+                    .catch(error => {
+                        console.log("Error adding drink to favorites");
+                    })
                 }
             }
 

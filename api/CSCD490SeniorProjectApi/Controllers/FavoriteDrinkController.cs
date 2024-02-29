@@ -16,7 +16,7 @@ namespace CSCD490SeniorProjectApi.Controllers
         {
             _configuration = configuration;
         }
-        [HttpPut]
+        [HttpGet]
         [Route("AddFavoriteDrink")]
         public JsonResult AddFavoriteDrink(string userEmail, string drinkName)
         {
