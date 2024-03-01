@@ -48,6 +48,12 @@
                 <RouterLink to="/UserSettings">Settings</RouterLink>
               </v-list-item-title>
             </v-list-item>
+
+            <v-list-item v-if="user.loggedIn">
+              <v-list-item-title>
+                <RouterLink to="/SaveIngredients">Save Ingredients</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
             
             <v-list-item  v-if="user.loggedIn">
               <v-list-item-title @click.prevent="signOut">
@@ -66,6 +72,7 @@
               <RouterLink to="/login">Login</RouterLink>
               </v-list-item-title>
             </v-list-item>
+
           </v-list>
       </v-menu> 
     </v-app-bar>
