@@ -3,7 +3,7 @@
     <div class="card">
       <div v-if="user.loggedIn">
         <div class="card-body">
-          <div class="card-header" style="text-align: center">Select your saved drinks and press the save button to save your common ingredients for next time you use the site!</div>
+          <div class="card-header" style="text-align: center">Select your ingredients and press the save button to save your common ingredients for next time you use the site!</div>
         </div>
       </div>
     </div>
@@ -41,7 +41,7 @@
                 </v-list-item>
             </v-list>
         </v-card>
-        <v-btn @click="saveIngredients(userEmail)">Save Ingredients</v-btn>
+        <v-btn @click="saveMultipleIngredients(); $router.push('/Dashboard')">Save Ingredients</v-btn>
         </div>
     </div>
 </template>
@@ -92,9 +92,6 @@ export default {
   
   methods: {
 
-    logWorking() {
-          console.log("working");
-        },
         selectIngredient(ingredient) {
           this.selectedIngredients.push(ingredient);
         },
@@ -105,14 +102,27 @@ export default {
           
         },
 
-        //Currently not working on site, but works in swagger
-        saveMultipleIngredients(userEmail, selectedIngredients) { //TODO FIX THIS
+        saveMultipleIngredients() {
                 //Goal: for every selected item in selectedIngredients, save the ingredient to the user's saved ingredients database
-                this.userEmail = auth.currentUser.email;
+                let userEmail = "";
+                userEmail = auth.currentUser.email;
                 if (userEmail == null) {
                     console.log("No user logged in");
                 }
                 else {
+                    //remove all of the user's saved ingredients
+                    axios.delete('/api/Ingredient/RemoveAllSavedIngredients', {
+                        params: {
+                            userEmail: userEmail
+                        }
+                    }).then(response => {
+                        console.log("All ingredients removed");
+                    })
+                    .catch(error => {
+                            console.log("Error removing ingredients");
+                    })
+
+                    //replace with new saved ingredients
                     let ingredientName = "";
                     for (let i = 0; i < this.selectedIngredients.length; i++) {
                         ingredientName = this.selectedIngredients[i].ingredientName;
@@ -130,24 +140,7 @@ export default {
                     }
                     
                 }
-            },
-      
-      //Different attempt, also not working on side, but works in swagger      
-      saveIngredient(userEmail, ingredient) {
-        this.userEmail = auth.currentUser.email;
-        axios.get('/api/Ingredient/SaveIngredient',{
-          params: {
-            userEmail: userEmail,
-            ingredient: ingredient
-          }
-        }).then(response => {
-          console.log("Ingredient saved");
-        })
-        .catch(error => {
-          console.log("Error saving ingredient");
-        })
-      }
-            
+            },          
             
     },
 
