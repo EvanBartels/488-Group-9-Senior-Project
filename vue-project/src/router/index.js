@@ -9,6 +9,7 @@ import IngredientSelector from '@/components/IngredientSelector.vue'
 import Dashboard from '@/views/UserDashboardView.vue'
 import UserSettings from '@/views/UserSettingsView.vue'
 import DrinkInfoDialog from '@/components/DrinkInfoDialog.vue'
+import FooterFile from '@/components/FooterFile.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -59,6 +60,11 @@ const router = createRouter({
             path: '/UserSettings',
             name: 'UserSettings',
             component: UserSettings
+        },
+        {
+            path: '/Footer',
+            name: 'FooterFile',
+            component: FooterFile
         }
     ]
   })

@@ -8,16 +8,22 @@
         <div>
 <IngredientSelector></IngredientSelector>
     </div>
+    <br>
+    <div>
+<FooterFile></FooterFile>
+    </div>
 
 </template>
 
 <script>
-import IngredientSelector from '../components/IngredientSelector.vue';
 import DrinkInfoDialog from '../components/DrinkInfoDialog.vue';
+import FooterFile from '../components/FooterFile.vue';
+import IngredientSelector from '../components/IngredientSelector.vue';
 export default {
     components: {
         IngredientSelector,
-        DrinkInfoDialog
+        DrinkInfoDialog,
+        FooterFile
     }
 }
 </script>
