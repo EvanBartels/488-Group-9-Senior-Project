@@ -9,6 +9,7 @@ import IngredientSelector from '@/components/IngredientSelector.vue'
 import Dashboard from '@/views/UserDashboardView.vue'
 import UserSettings from '@/views/UserSettingsView.vue'
 import DrinkInfoDialog from '@/components/DrinkInfoDialog.vue'
+import SaveIngredients from '@/views/SaveIngredientView.vue'
 import FooterFile from '@/components/FooterFile.vue'
 
 const router = createRouter({
@@ -62,10 +63,17 @@ const router = createRouter({
             component: UserSettings
         },
         {
+            path: '/SaveIngredients',
+            name: 'SaveIngredients',
+            component: SaveIngredients
+
+        },
+        {
             path: '/Footer',
             name: 'FooterFile',
             component: FooterFile
         }
+      
     ]
   })
 

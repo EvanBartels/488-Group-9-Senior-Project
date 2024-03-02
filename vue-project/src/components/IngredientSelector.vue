@@ -28,7 +28,7 @@
             @click="selectIngredient(item)"
           >
             <v-list-item-title>{{ item.ingredientName }}</v-list-item-title>
-          </v-list-item>
+          </v-list-item> <!-- TODO: Carter or Travis, -->
         </v-list>
       </v-menu>
       <div>
