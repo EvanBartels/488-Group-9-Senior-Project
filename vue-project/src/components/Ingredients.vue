@@ -34,9 +34,9 @@
 
     <div>
         <v-card class="mx-auto" max-width="500">
-            <v-list disabled> <!--TODO: Carter or Travis, enable this v-list, make a @click call on the v-list-item to call a method that removes the ingredient from the list-->
+            <v-list> <!--TODO: Carter or Travis, enable this v-list, make a @click call on the v-list-item to call a method that removes the ingredient from the list-->
                 <v-list-subheader>Selected Ingredients</v-list-subheader>
-                <v-list-item v-for="(item, index) in selectedIngredients" :key="index">
+                <v-list-item v-for="(item, index) in selectedIngredients" :key="index" @click="removeIngredient(index)">
                     <v-list-item-title v-text="item.ingredientName"></v-list-item-title>
                 </v-list-item>
             </v-list>
@@ -83,11 +83,13 @@ export default {
 
   data: () => ({
     items: [],
+    items2: [],
     selectedIngredients: [],
     userEmail: "",
   }),
   mounted() {
     this.getIngredients();
+    this.populateSelectedIngredients();
   },
   
   methods: {
@@ -95,11 +97,36 @@ export default {
         selectIngredient(ingredient) {
           this.selectedIngredients.push(ingredient);
         },
+        removeIngredient(index) {
+          this.selectedIngredients.splice(index, 1);
+        },
         getIngredients() {
           axios.get("api/DrinkRecipe/GetIngredients").then(response => {
             this.items = response.data;
           });
           
+        },
+        populateSelectedIngredients() {
+            let userEmail = "";
+            userEmail = auth.currentUser.email;
+            if (userEmail == null) {
+                console.log("No user logged in");
+            }
+            else {
+                axios.get('/api/Ingredient/GetSavedIngredients', {
+                    params: {
+                        userEmail: userEmail
+                    }
+                }).then(response => {
+                    this.items2 = response.data;
+                    for (let i = 0; i < this.items2.length; i++) {
+                        this.selectedIngredients.push(this.items2[i]);
+                    }
+                })
+                .catch(error => {
+                    console.log("Error getting saved ingredients");
+                })
+            }
         },
 
         saveMultipleIngredients() {
@@ -116,28 +143,30 @@ export default {
                             userEmail: userEmail
                         }
                     }).then(response => {
-                        console.log("All ingredients removed");
+                            console.log("All ingredients removed");
                     })
                     .catch(error => {
                             console.log("Error removing ingredients");
                     })
-
-                    //replace with new saved ingredients
-                    let ingredientName = "";
-                    for (let i = 0; i < this.selectedIngredients.length; i++) {
-                        ingredientName = this.selectedIngredients[i].ingredientName;
-                        axios.get('/api/Ingredient/SaveIngredientsFromSelectedIngredients',{
-                        params: {
-                            userEmail: userEmail,
-                            ingredient: ingredientName
-                        }
-                        }).then(response => {
-                            console.log("Ingredient saved");
-                        })
-                        .catch(error => {
-                            console.log("Error saving ingredient");
-                        })
-                    }
+                    
+                    setTimeout(() => {
+                      //replace with new saved ingredients
+                      let ingredientName = "";
+                      for (let i = 0; i < this.selectedIngredients.length; i++) {
+                          ingredientName = this.selectedIngredients[i].ingredientName;
+                          axios.get('/api/Ingredient/SaveIngredientsFromSelectedIngredients',{
+                          params: {
+                              userEmail: userEmail,
+                              ingredient: ingredientName
+                          }
+                          }).then(response => {
+                              console.log("Ingredient saved");
+                          })
+                          .catch(error => {
+                              console.log("Error saving ingredient");
+                          })
+                      }
+                    }, 1000);  
                     
                 }
             },          
