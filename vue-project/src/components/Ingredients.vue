@@ -48,7 +48,6 @@
 
 <script>
 import axios from 'axios'
-// const API_URL = "http://localhost:5019/"; //TODO azure web service url
 
 import { useStore} from "vuex";
 import { useRouter } from "vue-router";
