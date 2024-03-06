@@ -54,6 +54,12 @@
                 <RouterLink to="/SaveIngredients">Save Ingredients</RouterLink>
               </v-list-item-title>
             </v-list-item>
+
+            <v-list-item>
+              <v-list-item-title>
+                <RouterLink to="/ViewAllDrinks">All Drinks</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
             
             <v-list-item  v-if="user.loggedIn">
               <v-list-item-title @click.prevent="signOut">

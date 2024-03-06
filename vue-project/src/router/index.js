@@ -10,6 +10,7 @@ import Dashboard from '@/views/UserDashboardView.vue'
 import UserSettings from '@/views/UserSettingsView.vue'
 import DrinkInfoDialog from '@/components/DrinkInfoDialog.vue'
 import SaveIngredients from '@/views/SaveIngredientView.vue'
+import ViewAllDrinks from '@/views/ViewAllDrinks.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -65,6 +66,12 @@ const router = createRouter({
             path: '/SaveIngredients',
             name: 'SaveIngredients',
             component: SaveIngredients
+        }
+        ,
+        {
+            path: '/ViewAllDrinks',
+            name: 'ViewAllDrinks',
+            component: ViewAllDrinks
         }
     ]
   })
