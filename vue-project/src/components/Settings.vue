@@ -38,7 +38,7 @@
             <div class="card-header"><strong>Delete Your Account: The button below will delete your account. Once pressed all your information will be removed from this site.</strong></div>
             <div class="card-body">
               <div v-if="error" class="alert alert-danger">{{error}}</div>
-              <form action="#"  @submit.prevent="DeleteUser">
+              <form action="#"  @click.prevent="RemoveAll()">
                 <div class="form-group row mb-0">
                   <div class="col-md-8 offset-md-4">
                     <v-btn type="submit" class="btn btn-primary">Delete Account</v-btn>
@@ -53,9 +53,12 @@
   </template>
   
   <script>
+  import axios from 'axios'
+
   import { ref } from 'vue'
   import { useStore } from 'vuex'
   import { useRouter } from 'vue-router'
+  import { auth } from '../firebaseConfig'
   
   export default {
     name: "SettingsComponent",
@@ -69,7 +72,7 @@
       const ChangeName = async () => {
         try {
           await store.dispatch('ChangeName', {name: name.value})
-          router.push('/UserSettings')
+          router.push('/Dashboard')
         } catch (err) {
           error.value = err.message
         }
@@ -85,8 +88,47 @@
       }
 
       return {name, error, ChangeName, DeleteUser}
+    },
+
+    data: () => ({
+    userEmail: "",
+    }),
+
+    methods: {
+      RemoveAll() {
+        let userEmail = "";
+        userEmail = auth.currentUser.email;
+
+        //delete saved ingredients
+        axios.delete('/api/Ingredient/RemoveAllSavedIngredients', {
+          params: {
+            userEmail: userEmail
+          }
+        }).then(response => {
+            console.log("All ingredients removed");
+        })
+        .catch(error => {
+            console.log("Error removing saved ingredients");
+        })
+
+        //delete favorited drinks
+        axios.delete('/api/FavoriteDrink/RemoveAllFavoriteDrinks', {
+          params: {
+            userEmail: userEmail
+          }
+        }).then(response => {
+            console.log("All drinks removed");
+        })
+        .catch(error => {
+            console.log("Error removing favorite drinks");
+        })
+
+        //delete the user
+        this.DeleteUser();
+      }
     }
-  };
+    
+  }
   </script>
 
 <style scoped>

@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="signup-container">
       <div class="row justify-content-center">
         <div class="col-md-8">
           <div class="card">
@@ -58,7 +58,7 @@
   
                 <div class="form-group row mb-0">
                   <div class="col-md-8 offset-md-4">
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <v-btn type="submit" class="btn btn-primary">Register</v-btn>
                   </div>
                 </div>
               </form>
@@ -104,3 +104,26 @@
     }
   };
   </script>
+
+<style scoped>
+.signup-container {
+  max-width: 300px;
+  margin: auto;
+  padding: 20px;
+  border: 3px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+}
+</style>

@@ -80,7 +80,7 @@ namespace CSCD490SeniorProjectApi.Controllers
             }
             return new JsonResult(dataTable);
         }
-        [HttpPut]
+        [HttpDelete]
         [Route("RemoveAllFavoriteDrinks")]
         public JsonResult RemoveAllFavoriteDrinks(string userEmail)
         {
