@@ -31,15 +31,15 @@
               </v-list-item-title>
             </v-list-item>
 
-            <v-list-item>
-              <v-list-item-title>
-              <RouterLink to="/about">About</RouterLink>
-              </v-list-item-title>
-            </v-list-item>
-
             <v-list-item  v-if="user.loggedIn">
               <v-list-item-title>
               <RouterLink to="/Dashboard">Dashboard</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+
+            <v-list-item>
+              <v-list-item-title>
+              <RouterLink to="/about">About</RouterLink>
               </v-list-item-title>
             </v-list-item>
 
@@ -52,6 +52,12 @@
             <v-list-item v-if="user.loggedIn">
               <v-list-item-title>
                 <RouterLink to="/SaveIngredients">Save Ingredients</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+
+            <v-list-item>
+              <v-list-item-title>
+                <RouterLink to="/ViewAllDrinks">All Drinks</RouterLink>
               </v-list-item-title>
             </v-list-item>
             

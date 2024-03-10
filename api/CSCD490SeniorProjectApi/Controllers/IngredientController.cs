@@ -62,5 +62,27 @@ namespace CSCD490SeniorProjectApi.Controllers
             return new JsonResult(dataTable);
         }
 
+        [HttpGet]
+        [Route("GetSavedIngredients")]
+        public JsonResult GetIngredients(string userEmail)
+        {
+            string query = "select distinct ingredientName from dbo.savedIngredients where userEmail = '" + userEmail + "'";
+            DataTable dataTable = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    dataTable.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return new JsonResult(dataTable);
+        }
+
     }
 }

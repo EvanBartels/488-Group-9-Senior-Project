@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 import { auth } from './firebaseConfig'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, getAuth, deleteUser } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, getAuth, deleteUser, updatePassword} from "firebase/auth";
 
 const store = createStore({
     state: {
@@ -70,6 +70,11 @@ const store = createStore({
         async ChangeName(context, {name}){
             let user = auth.currentUser
             return updateProfile(user, {displayName: name})
+        },
+
+        async ChangePassword(context, {password}){
+            let user = auth.currentUser
+            return updatePassword(user, password)
         },
 
         async DeleteUser(context){
