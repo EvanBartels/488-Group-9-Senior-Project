@@ -6,22 +6,22 @@
       <v-app-bar-title color="white">
         <v-icon color="altColor">mdi-glass-cocktail
         </v-icon>
-        <span style="color:white">Cocktail Mixer</span>
+        <span style="color:white">COCKTAIL MIXER</span>
       </v-app-bar-title>
       </RouterLink>
       
       <RouterLink v-if="user.loggedIn" to="/Dashboard">
-      <v-app-bar-title color="white">
+        <v-app-bar-title color="white">
         <v-icon color="altColor">mdi-glass-cocktail
         </v-icon>
-        <span style="color:white">Cocktail Mixer</span>
+        <span style="color:white">COCKTAIL MIXER</span>
       </v-app-bar-title>
       </RouterLink>
 
       <v-spacer></v-spacer>
       <v-menu>
           <template v-slot:activator="{ props }">
-            <v-btn color='altColor' icon="mdi-hamburger" v-bind="props"></v-btn>
+            <v-btn color='altColor' icon="mdi-menu-down-outline" v-bind="props"></v-btn>
           </template>
           <v-list width="200">
 

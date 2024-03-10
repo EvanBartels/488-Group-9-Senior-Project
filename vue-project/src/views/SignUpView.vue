@@ -8,14 +8,20 @@
       <div>
 <Register></Register>
   </div>
+  <br>
+  <div>
+    <FooterFile></FooterFile>
+  </div>
 
 </template>
 
 <script>
+import FooterFile from '../components/FooterFile.vue';
 import Register from '../components/Register.vue';
 export default {
   components: {
-      Register
+      Register,
+      FooterFile
   }
 }
 </script>

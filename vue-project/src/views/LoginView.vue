@@ -12,10 +12,12 @@
 </template>
 
 <script>
+import FooterFile from '../components/FooterFile.vue';
 import Login from '../components/Login.vue';
 export default {
   components: {
-      Login
+      Login,
+      FooterFile
   }
 }
 </script>

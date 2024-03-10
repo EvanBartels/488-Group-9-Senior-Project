@@ -15,13 +15,19 @@
     </p>
     <slot name="text"></slot>
   </div>
-  
+  <br>
+    <div>
+<FooterFile></FooterFile>
+    </div>
 </template>
 
 <script>
-
+import FooterFile from '../components/FooterFile.vue';
 export default {
-  name: 'Home'
+  name: 'Home',
+  components:{
+    FooterFile
+  }
 }
 </script>
 
