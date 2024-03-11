@@ -132,7 +132,10 @@
           },
         populateSelectedIngredients() {
           let userEmail = "";
-          userEmail = auth.currentUser.email;
+          if (auth.currentUser) {
+            userEmail = auth.currentUser.email
+          }
+          //userEmail = auth.currentUser.email;
           if (userEmail == null) {
               console.log("No user logged in");
           }

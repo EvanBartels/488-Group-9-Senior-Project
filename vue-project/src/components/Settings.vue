@@ -25,7 +25,7 @@
                 </div>
   
                 <div class="form-group row mb-0">
-                  <div class="col-md-8 offset-md-4" style="margin-bottom: 30px;">
+                  <div class="col-md-8" style="margin-bottom: 30px; text-align: center;">
                     <v-btn type="submit" class="btn btn-primary">Change Name</v-btn>
                   </div>
                 </div>
@@ -49,7 +49,7 @@
                 </div>
   
                 <div class="form-group row mb-0">
-                  <div class="col-md-8 offset-md-4" style="margin-bottom: 10px;">
+                  <div class="col-md-8" style="margin-bottom: 10px; text-align: center;">
                     <v-btn type="submit" class="btn btn-primary">Change Password</v-btn>
                   </div>
                 </div>
@@ -66,7 +66,7 @@
               <div v-if="error" class="alert alert-danger">{{error}}</div>
               <form action="#" @submit.prevent="RemoveAll()">
                 <div class="form-group row mb-0">
-                  <div class="col-md-8 offset-md-4">
+                  <div class="col-md-8" style='text-align: center;'>
                     <button type="submit" class="btn btn-primary" style="color: white; background-color: red; padding: 10px; border: none; border-radius: 4px; cursor: pointer;" onclick="RemoveAll()">Delete Account</button>
                   </div>
                 </div>
