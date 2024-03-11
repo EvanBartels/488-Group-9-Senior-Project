@@ -6,7 +6,7 @@
       <v-app-bar-title color="white">
         <v-icon color="altColor">mdi-glass-cocktail
         </v-icon>
-        <span style="color:white">COCKTAIL MIXER</span>
+        <span style="color:white">Cocktail Mixer</span>
       </v-app-bar-title>
       </RouterLink>
       
@@ -14,7 +14,7 @@
         <v-app-bar-title color="white">
         <v-icon color="altColor">mdi-glass-cocktail
         </v-icon>
-        <span style="color:white">COCKTAIL MIXER</span>
+        <span style="color:white">Cocktail Mixer</span>
       </v-app-bar-title>
       </RouterLink>
 
