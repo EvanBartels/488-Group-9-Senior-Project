@@ -9,12 +9,13 @@
         </header>
         <section class = "modal-body">
             <slot name="body">
-                <v-card-title>Ingredients:</v-card-title> <!--//TODO: Carter, this is where the ingredients will be displayed !-->
+                <v-card-title>Ingredients</v-card-title> <!--//TODO: Carter, this is where the ingredients will be displayed !-->
                 <v-list>
                     <v-list-item v-for="(item, index) in drinkInfo" :key="index">
-                        <v-list-item-title v-text="item.ingredientName"></v-list-item-title>
+                        <v-list-item-title v-text="item.ingredientName + ' - Ratio: ' + item.ratio + '%'"></v-list-item-title>
                     </v-list-item>
                     </v-list>
+                    <v-card-text>ABV: {{ drinkInfo[0].abv }}%</v-card-text>
             </slot>
             <v-btn @click="addFavoriteDrink(userEmail, drinkName)">Add Favorite</v-btn> <!--This should not show up for those not logged in-->
         </section>
@@ -76,7 +77,20 @@
             this.getDrinkInfo(this.drinkName);
         },
         data: () => ({
-            drinkInfo: []
+            drinkInfo: [
+    {
+        "drinkName": "Vodka Cranberry",
+        "ratio": 67,
+        "ingredientName": "Cranberry Juice",
+        "abv": 20
+    },
+    {
+        "drinkName": "Vodka Cranberry",
+        "ratio": 33,
+        "ingredientName": "Vodka",
+        "abv": 80
+    }
+]
         })
     
     }
