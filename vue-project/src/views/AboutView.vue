@@ -38,8 +38,9 @@
 </div>
 -->
 <div class="about-page">
-    <h1>Project Goal</h1>
-    <p></p>
+    <h1>Project Description</h1>
+    <p>The customer wants a website that gives a list of hard drinks and instructions on how to make said hard drinks given a list of alcohols, soft drinks, and juices they provide. The website should be highly convenient and easily understandable with a logical flow, including ways to accommodate both single-use users and frequent users, allowing it to be used by all but faster for frequent users who have their preferences/allergies and common ingredients saved. If possible the website should accommodate other prepped drinks such as coffees, energy drinks, and smoothies.
+</p>
     <br>
     <h1>About Us</h1>
     <div v-for="member in teamMembers" :key="member.id" class="team-member">
