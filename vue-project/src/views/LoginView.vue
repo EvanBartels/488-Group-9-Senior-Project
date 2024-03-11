@@ -7,6 +7,8 @@
       <br>
       <div>
 <Login></Login>
+<br>
+<FooterFile></FooterFile>
   </div>
 
 </template>
