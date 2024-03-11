@@ -136,7 +136,7 @@
             userEmail = auth.currentUser.email
           }
           //userEmail = auth.currentUser.email;
-          if (userEmail == null) {
+          if (userEmail == "") {
               console.log("No user logged in");
           }
           else {
