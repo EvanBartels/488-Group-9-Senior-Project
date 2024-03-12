@@ -17,14 +17,21 @@
                     </v-list>
                     <v-card-text>ABV: {{ drinkInfo[0].abv }}%</v-card-text>
             </slot>
-            <v-btn @click="addFavoriteDrink(userEmail, drinkName)">Add Favorite</v-btn> <!--This should not show up for those not logged in-->
+            <div v-if="user.loggedIn" class="card-header" style ='text-align: center;'>
+                <v-btn @click="addFavoriteDrink(userEmail, drinkName)">Add Favorite</v-btn> <!--This should not show up for those not logged in-->
+            </div>
         </section>
         </v-card>
     </div>
     
 </template>
 <script>
+    import { useStore} from "vuex";
+    import { useRouter } from "vue-router";
+    import {computed} from "vue";
+    import { auth } from '../firebaseConfig';
     import axios from 'axios'
+
     export default {
         name: "DrinkInfoDialog",
         props: {
@@ -36,6 +43,26 @@
                 type: String,
                 default: "No User Logged In"
             }
+        },
+
+        setup() {
+            const store = useStore()
+            const router = useRouter()
+
+            auth.onAuthStateChanged(user => {
+                store.dispatch("fetchUser", user);
+            });
+
+            const user = computed(() => {
+                return store.getters.user;
+            });
+
+            const signOut = async () => {
+                await store.dispatch('logOut')
+                router.push('/')
+            }
+
+            return {user,signOut}
         },
 
         methods: {
@@ -77,20 +104,7 @@
             this.getDrinkInfo(this.drinkName);
         },
         data: () => ({
-            drinkInfo: [
-    {
-        "drinkName": "Vodka Cranberry",
-        "ratio": 67,
-        "ingredientName": "Cranberry Juice",
-        "abv": 20
-    },
-    {
-        "drinkName": "Vodka Cranberry",
-        "ratio": 33,
-        "ingredientName": "Vodka",
-        "abv": 80
-    }
-]
+            drinkInfo: []
         })
     
     }
