@@ -100,5 +100,26 @@ namespace CSCD490SeniorProjectApi.Controllers
             }
             return new JsonResult(dataTable);
         }
+        [HttpGet]
+        [Route("FavoriteDrinkExists")]
+        public Boolean FavoriteDrinkExists(string userEmail, string drinkName)
+        {
+            string query = "select count(*) from dbo.favoriteDrinks where userEmail = '" + userEmail + "' and drinkName = '" + drinkName + "'";
+            DataTable dataTable = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    dataTable.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return dataTable.Rows[0].Field<int>(0) > 0;
+        }   
     }
 }

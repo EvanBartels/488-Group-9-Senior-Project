@@ -19,8 +19,10 @@
             </slot>
             <div v-if="user.loggedIn" class="card-header" style ='text-align: center;'>
                 <v-btn @click="addFavoriteDrink(userEmail, drinkName)">Add Favorite</v-btn> <!--This should not show up for those not logged in-->
+                <span v-if="checkFavoriteDrink()"> 
                 <v-btn @click="removeFavoriteDrink(userEmail, drinkName)">Remove Favorite</v-btn> <!--This should not show up for those not logged in-->
-            </div>
+            </span>
+        </div>
         </section>
         </v-card>
     </div>
@@ -110,12 +112,29 @@
                 .catch(error => {
                     console.log("Error removing drink from favorites");
                 })
+            },
+            checkFavoriteDrink() {
+                axios.get('/api/FavoriteDrink/FavoriteDrinkExists',{
+                    params: {
+                        drinkName: this.drinkName,
+                        userEmail: this.userEmail
+                    }
+                }).then(response => {
+                    this.hasFavoriteDrink = response.data;
+                    console.log("User has favorite drink");
+                })
+                .catch(error => {
+                    this.hasFavoriteDrink = false;
+                    console.log("User does not have favorite drink");
+                })
+                return this.hasFavoriteDrink;
             }
 
             
         },
         mounted() {
             this.getDrinkInfo(this.drinkName);
+            this.checkFavoriteDrink();
         },
         data: () => ({
             drinkInfo: [{
@@ -123,7 +142,8 @@
     "ratio": 100,
     "ingredientName": "Default Ingredient",
     "abv": 99
-  }]
+  }],
+            hasFavoriteDrink: false
         })
     
     }
