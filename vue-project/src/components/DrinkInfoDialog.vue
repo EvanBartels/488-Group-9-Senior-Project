@@ -19,6 +19,7 @@
             </slot>
             <div v-if="user.loggedIn" class="card-header" style ='text-align: center;'>
                 <v-btn @click="addFavoriteDrink(userEmail, drinkName)">Add Favorite</v-btn> <!--This should not show up for those not logged in-->
+                <v-btn @click="removeFavoriteDrink(userEmail, drinkName)">Remove Favorite</v-btn> <!--This should not show up for those not logged in-->
             </div>
         </section>
         </v-card>
@@ -78,7 +79,7 @@
                 this.drinkInfo = response.data; //TODO: Carter, this response.data is a JSON with ingredient name, ratio, and abv, display it on the popup please
             });
             },
-            addFavoriteDrink(userEmail, drinkName) { //TODO FIX THIS
+            addFavoriteDrink(userEmail, drinkName) { 
                 console.log(userEmail)
                 if (userEmail == "No User Logged In") {
                     console.log("No user logged in");
@@ -96,6 +97,19 @@
                         console.log("Error adding drink to favorites");
                     })
                 }
+            },
+            removeFavoriteDrink(userEmail, drinkName) {
+                axios.get('/api/FavoriteDrink/RemoveFavoriteDrink',{
+                    params: {
+                        drinkName: drinkName,
+                        userEmail: userEmail
+                    }
+                }).then(response => {
+                    console.log("Drink removed from favorites");
+                })
+                .catch(error => {
+                    console.log("Error removing drink from favorites");
+                })
             }
 
             
@@ -104,7 +118,12 @@
             this.getDrinkInfo(this.drinkName);
         },
         data: () => ({
-            drinkInfo: []
+            drinkInfo: [{
+    "drinkName": "Default Drink",
+    "ratio": 100,
+    "ingredientName": "Default Ingredient",
+    "abv": 99
+  }]
         })
     
     }
