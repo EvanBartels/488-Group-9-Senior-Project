@@ -82,12 +82,12 @@
           </v-list>
       </v-menu> 
     </v-app-bar>
-
+<body>
     <!-- don't touch-->
     <v-main> 
       <router-view></router-view>
     </v-main>
- 
+  </body>
  </v-app>
 </template>
 
