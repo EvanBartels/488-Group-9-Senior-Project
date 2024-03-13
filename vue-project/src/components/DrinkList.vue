@@ -1,8 +1,15 @@
 <template>
     <div>
+        <v-switch
+    :label="switchLabel"
+    indeterminate
+    inset
+    v-model="switchValue"
+    @change="toggleAlcoholicDrinks"
+  ></v-switch>
       <v-card class="mx-5">
        <v-list enabled>
-       <v-list-subheader>All Drinks</v-list-subheader>
+       <v-list-subheader>{{switchLabel}}</v-list-subheader>
        <v-list-item v-for="(item, index) in drinkList" :key="index" @click="showDrinkInfoDialog(item.drinkName)">
         <v-list-item-title v-text="item.drinkName"></v-list-item-title>
         </v-list-item>
@@ -47,15 +54,20 @@
         data: () => ({
             items: [],
             drinkList: [],
+            alcoholicDrinks: [],
+            nonAlcoholicDrinks: [],
             matchingDrinks: [],
             isDialogOpen: false,
             selectedDrink: "",
             drinkInfo: [],
-            userEmail: ""
+            userEmail: "",
+            switchLabel: "All Drinks",
         }),
         mounted() {
             this.userEmail = this.user.email;
             this.getAllDrinks();
+            this.getNonAlcoholicDrinks();
+            this.getAlcoholicDrinks();
         },
         methods: {
             getAllDrinks() {
@@ -66,6 +78,34 @@
                 .catch(error => {
                     console.log(error);
                 });
+            },
+            getNonAlcoholicDrinks() {
+                axios.get('/api/DrinkRecipe/GetNonAlcoholicDrinks')
+                .then(response => {
+                    this.nonAlcoholicDrinks = response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            },
+            getAlcoholicDrinks() {
+                axios.get('/api/DrinkRecipe/GetAlcoholicDrinks')
+                .then(response => {
+                    this.alcoholicDrinks = response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            },
+            toggleAlcoholicDrinks() {
+                if (this.switchValue) {
+                    this.drinkList = this.alcoholicDrinks;
+                    this.switchLabel = "Alcoholic Drinks"
+                }
+                else {
+                    this.drinkList = this.nonAlcoholicDrinks;
+                    this.switchLabel = "Non-Alcoholic Drinks"
+                }
             },
             showDrinkInfoDialog(drinkName) {
             this.selectedDrink = drinkName;

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CSCD490SeniorProjectApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f0535dbb007439d14a3edecb6142aaecb55f7307")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9370a96bb88229fc5434178fdedb5ca8b11fe6ce")]
 [assembly: System.Reflection.AssemblyProductAttribute("CSCD490SeniorProjectApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CSCD490SeniorProjectApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
