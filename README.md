@@ -9,7 +9,7 @@ EWU Fall 2023/Winter 2024 Senior Project on Drink Website
 * Carter Hosking - _Frontend Developer_ 
 
 ## Requirements
-https://docs.google.com/document/d/1-mg-PrL5cOEsof3I5fonUpCcTMp6q0zeUaAD-2vyZ70
+[Requirements Document](https://docs.google.com/document/d/1-mg-PrL5cOEsof3I5fonUpCcTMp6q0zeUaAD-2vyZ70)
 
 ## Tools
 * [VueJS](https://vuejs.org/)
