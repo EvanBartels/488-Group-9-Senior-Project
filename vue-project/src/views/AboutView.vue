@@ -72,13 +72,15 @@ export default {
           role: "Back End",
           description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
           image: "../pics/Michael_Moran.jpg",
+          //socials: "https://github.com",
         },
         {
           id: 2,
           name: "Evan Bartels",
           role: "Back End",
           description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          image: "../pics/Evan_Bartels.jpg", 
+          image: "../pics/Evan_Bartels.jpg",
+          //socials: "https://github.com",
         },
         {
           id: 3,
@@ -86,6 +88,7 @@ export default {
           role: "Front End",
           description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
           image: "../pics/Travis_Ho.jpg", 
+          socials: "https://github.com/TravisHo9",
         },
         {
           id: 4,
@@ -93,6 +96,7 @@ export default {
           role: "Front End",
           description: "Why did I want to work on this project? My specialties include Jaeger Bombs, icing my roomates, and becoming the bartenders favorite.",
           image: "../pics/Carter_Hosking.jpeg", 
+          //socials: "https://github.com",
         },
        
       ],
