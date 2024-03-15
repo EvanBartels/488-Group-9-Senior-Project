@@ -8,14 +8,18 @@
         <div>
   <Settings></Settings>
     </div>
+    <br />
+  <FooterFile></FooterFile>
   
   </template>
   
   <script>
   import Settings from '../components/Settings.vue';
+  import FooterFile from '../components/FooterFile.vue';
   export default {
     components: {
-        Settings
+        Settings,
+        FooterFile
     }
   }
   </script>

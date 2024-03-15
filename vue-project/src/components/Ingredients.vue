@@ -20,7 +20,7 @@
                 Select ingredients
               </v-btn>
             </template>
-      
+            
             <v-list>
               <v-list-item
                 v-for="(item, index) in items"
@@ -34,13 +34,14 @@
 
     <div>
         <v-card class="mx-auto" max-width="500">
-            <v-list> <!--TODO: Carter or Travis, enable this v-list, make a @click call on the v-list-item to call a method that removes the ingredient from the list-->
+            <v-list> 
                 <v-list-subheader>Selected Ingredients</v-list-subheader>
                 <v-list-item v-for="(item, index) in selectedIngredients" :key="index" @click="removeIngredient(index)">
                     <v-list-item-title v-text="item.ingredientName"></v-list-item-title>
                 </v-list-item>
             </v-list>
         </v-card>
+        <br />
         <v-btn @click="saveMultipleIngredients(); $router.push('/Dashboard')">Save Ingredients</v-btn>
         </div>
     </div>

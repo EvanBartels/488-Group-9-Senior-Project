@@ -56,7 +56,7 @@ export default {
           id: 4,
           name: "Carter Hosking",
           role: "Front End",
-          description: "Why did I want to work on this project? I wanted to show my creativity on designing front end components and felt this was a fun topic considering I drink different coffee drinks and alcoholic drinks all the time.",
+          description: "Why did I want to work on this project? I wanted to show my creativity on designing front end components and felt this was a fun topic considering I drink different coffee drinks and alcoholic drinks all the time. I also learned much in javascript as well as how to develop on the Vue platform.",
           image: "/src/pics/cart1.jpg", 
         },
        
