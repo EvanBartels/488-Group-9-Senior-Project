@@ -60,6 +60,21 @@
                 <div class="my-4 text-center">
                   <v-btn @click.prevent="signOut" class="btn btn-primary">Log Out</v-btn>
                 </div>
+
+                
+                <div>
+                      <v-card class="mx-5">
+                        <v-list enabled>
+                          <v-list-subheader>Your Favorited Drinks</v-list-subheader>
+                            <v-list-item v-for="(item, index) in drinkList" :key="index" @click="showDrinkInfoDialog(item.drinkName)">
+                              <v-list-item-title v-text="item.drinkName"></v-list-item-title>
+                            </v-list-item>
+                        </v-list>
+                      </v-card>
+                    </div>
+                    <DrinkInfoDialog v-if="isDialogOpen" :drinkName="selectedDrink" :userEmail="userEmail" @close="closeDrinkInfoDialog" />
+
+
               </div>
             </div>
           </div>
