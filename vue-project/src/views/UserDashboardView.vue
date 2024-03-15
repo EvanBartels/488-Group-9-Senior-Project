@@ -8,14 +8,19 @@
         <div>
   <Dashboard></Dashboard>
     </div>
+    <br />
+  <FooterFile></FooterFile>
   
   </template>
   
   <script>
   import Dashboard from '../components/Dashboard.vue';
+  import FooterFile from '../components/FooterFile.vue';
+
   export default {
     components: {
-        Dashboard
+        Dashboard,
+        FooterFile
     }
   }
   </script>
