@@ -9,21 +9,32 @@
         </header>
         <section class = "modal-body">
             <slot name="body">
-                <v-card-title>Ingredients:</v-card-title> <!--//TODO: Carter, this is where the ingredients will be displayed !-->
+                <v-card-title>Ingredients</v-card-title> <!--//TODO: Carter, this is where the ingredients will be displayed !-->
                 <v-list>
                     <v-list-item v-for="(item, index) in drinkInfo" :key="index">
-                        <v-list-item-title v-text="item.ingredientName"></v-list-item-title>
+                        <v-list-item-title v-text="item.ingredientName + ' - Ratio: ' + item.ratio + '%'"></v-list-item-title>
                     </v-list-item>
                     </v-list>
+                    <v-card-text>ABV: {{ drinkInfo[0].abv }}%</v-card-text>
             </slot>
-            <v-btn @click="addFavoriteDrink(userEmail, drinkName)">Add Favorite</v-btn> <!--This should not show up for those not logged in-->
+            <div v-if="user.loggedIn" class="card-header" style ='text-align: center;'>
+                <v-btn @click="addFavoriteDrink(userEmail, drinkName)">Add Favorite</v-btn> <!--This should not show up for those not logged in-->
+                <span v-if="checkFavoriteDrink()"> 
+                <v-btn @click="removeFavoriteDrink(userEmail, drinkName)">Remove Favorite</v-btn> <!--This should not show up for those not logged in-->
+            </span>
+        </div>
         </section>
         </v-card>
     </div>
     
 </template>
 <script>
+    import { useStore} from "vuex";
+    import { useRouter } from "vue-router";
+    import {computed} from "vue";
+    import { auth } from '../firebaseConfig';
     import axios from 'axios'
+
     export default {
         name: "DrinkInfoDialog",
         props: {
@@ -35,6 +46,26 @@
                 type: String,
                 default: "No User Logged In"
             }
+        },
+
+        setup() {
+            const store = useStore()
+            const router = useRouter()
+
+            auth.onAuthStateChanged(user => {
+                store.dispatch("fetchUser", user);
+            });
+
+            const user = computed(() => {
+                return store.getters.user;
+            });
+
+            const signOut = async () => {
+                await store.dispatch('logOut')
+                router.push('/')
+            }
+
+            return {user,signOut}
         },
 
         methods: {
@@ -50,7 +81,7 @@
                 this.drinkInfo = response.data; //TODO: Carter, this response.data is a JSON with ingredient name, ratio, and abv, display it on the popup please
             });
             },
-            addFavoriteDrink(userEmail, drinkName) { //TODO FIX THIS
+            addFavoriteDrink(userEmail, drinkName) { 
                 console.log(userEmail)
                 if (userEmail == "No User Logged In") {
                     console.log("No user logged in");
@@ -68,15 +99,51 @@
                         console.log("Error adding drink to favorites");
                     })
                 }
+            },
+            removeFavoriteDrink(userEmail, drinkName) {
+                axios.get('/api/FavoriteDrink/RemoveFavoriteDrink',{
+                    params: {
+                        drinkName: drinkName,
+                        userEmail: userEmail
+                    }
+                }).then(response => {
+                    console.log("Drink removed from favorites");
+                })
+                .catch(error => {
+                    console.log("Error removing drink from favorites");
+                })
+            },
+            checkFavoriteDrink() {
+                axios.get('/api/FavoriteDrink/FavoriteDrinkExists',{
+                    params: {
+                        drinkName: this.drinkName,
+                        userEmail: this.userEmail
+                    }
+                }).then(response => {
+                    this.hasFavoriteDrink = response.data;
+                    console.log("User has favorite drink");
+                })
+                .catch(error => {
+                    this.hasFavoriteDrink = false;
+                    console.log("User does not have favorite drink");
+                })
+                return this.hasFavoriteDrink;
             }
 
             
         },
         mounted() {
             this.getDrinkInfo(this.drinkName);
+            this.checkFavoriteDrink();
         },
         data: () => ({
-            drinkInfo: []
+            drinkInfo: [{
+    "drinkName": "Default Drink",
+    "ratio": 100,
+    "ingredientName": "Default Ingredient",
+    "abv": 99
+  }],
+            hasFavoriteDrink: false
         })
     
     }

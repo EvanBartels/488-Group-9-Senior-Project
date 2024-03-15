@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Security.AccessControl;
 
+
 namespace CSCD490SeniorProjectApi.Controllers
 {
     [Route("api/[controller]")]
@@ -22,7 +23,7 @@ namespace CSCD490SeniorProjectApi.Controllers
         {
             string query = "select distinct ingredientName from dbo.drinkRecipes";
             DataTable dataTable = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
+            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
@@ -43,7 +44,7 @@ namespace CSCD490SeniorProjectApi.Controllers
         {
             string query = "select distinct drinkName from dbo.drinkRecipes where ingredientName in " + ingredients;
             DataTable dataTable = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
+            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
@@ -64,7 +65,7 @@ namespace CSCD490SeniorProjectApi.Controllers
         {
             string query = "select * from dbo.drinkRecipes where drinkName = '" + drinkName + "'";
             DataTable dataTable = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
+            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
@@ -85,7 +86,49 @@ namespace CSCD490SeniorProjectApi.Controllers
         {
             string query = "select distinct drinkName from dbo.drinkRecipes";
             DataTable dataTable = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
+            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    dataTable.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return new JsonResult(dataTable);
+        }
+        [HttpGet]
+        [Route("GetNonAlcoholicDrinks")]
+        public JsonResult GetNonAlcoholicDrinks()
+        {
+            string query = "select distinct drinkName from dbo.drinkRecipes where abv = 0";
+            DataTable dataTable = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    dataTable.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return new JsonResult(dataTable);
+        }
+        [HttpGet]
+        [Route("GetAlcoholicDrinks")]
+        public JsonResult GetAlcoholicDrinks()
+        {
+            string query = "select distinct drinkName from dbo.drinkRecipes where abv > 0";
+            DataTable dataTable = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {

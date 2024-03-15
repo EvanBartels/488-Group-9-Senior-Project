@@ -22,7 +22,7 @@ namespace CSCD490SeniorProjectApi.Controllers
         {
             string query = "insert into dbo.favoriteDrinks (userEmail, drinkName) values ('" + userEmail + "', '" + drinkName + "')";
             DataTable dataTable = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
+            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
@@ -37,14 +37,13 @@ namespace CSCD490SeniorProjectApi.Controllers
             }
             return new JsonResult(dataTable);
         }
-        // TODO - Add a method to remove a favorite drink and remove all favorite drinks and to get favorite drinks
         [HttpGet]
         [Route("GetFavoriteDrinks")]
         public JsonResult GetFavoriteDrinks(string userEmail)
         {
             string query = "select drinkName from dbo.favoriteDrinks where userEmail = '" + userEmail + "'";
             DataTable dataTable = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
+            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
@@ -59,13 +58,13 @@ namespace CSCD490SeniorProjectApi.Controllers
             }
             return new JsonResult(dataTable);
         }
-        [HttpPut]
+        [HttpGet]
         [Route("RemoveFavoriteDrink")]
         public JsonResult RemoveFavoriteDrink(string userEmail, string drinkName)
         {
             string query = "delete from dbo.favoriteDrinks where userEmail = '" + userEmail + "' and drinkName = '" + drinkName + "'";
             DataTable dataTable = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
+            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
@@ -86,7 +85,7 @@ namespace CSCD490SeniorProjectApi.Controllers
         {
             string query = "delete from dbo.favoriteDrinks where userEmail = '" + userEmail + "'";
             DataTable dataTable = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
+            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
@@ -101,5 +100,26 @@ namespace CSCD490SeniorProjectApi.Controllers
             }
             return new JsonResult(dataTable);
         }
+        [HttpGet]
+        [Route("FavoriteDrinkExists")]
+        public Boolean FavoriteDrinkExists(string userEmail, string drinkName)
+        {
+            string query = "select count(*) from dbo.favoriteDrinks where userEmail = '" + userEmail + "' and drinkName = '" + drinkName + "'";
+            DataTable dataTable = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    dataTable.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return dataTable.Rows[0].Field<int>(0) > 0;
+        }   
     }
 }

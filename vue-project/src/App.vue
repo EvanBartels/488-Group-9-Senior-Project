@@ -6,7 +6,7 @@
       <v-app-bar-title color="white">
         <v-icon color="altColor">mdi-glass-cocktail
         </v-icon>
-        <span style="color:white">COCKTAIL MIXER</span>
+        <span style="color:white">Cocktail Mixer</span>
       </v-app-bar-title>
       </RouterLink>
       
@@ -14,7 +14,7 @@
         <v-app-bar-title color="white">
         <v-icon color="altColor">mdi-glass-cocktail
         </v-icon>
-        <span style="color:white">COCKTAIL MIXER</span>
+        <span style="color:white">Cocktail Mixer</span>
       </v-app-bar-title>
       </RouterLink>
 
@@ -82,12 +82,12 @@
           </v-list>
       </v-menu> 
     </v-app-bar>
-
+<body>
     <!-- don't touch-->
     <v-main> 
       <router-view></router-view>
     </v-main>
- 
+  </body>
  </v-app>
 </template>
 
@@ -132,3 +132,6 @@ export default {
   },
 };
 </script>
+<style>
+
+</style>
