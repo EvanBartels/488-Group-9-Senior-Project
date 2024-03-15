@@ -19,11 +19,11 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
 //Check if the app running on localhost
-if (window.location.hostname === 'localhost') {
-  Axios.defaults.baseURL = 'http://localhost:5019/' // Change with https://cscd490seniorprojectwebapp.azurewebsites.net/ if needed
-} else {
+// //if (window.location.hostname === 'localhost') {
+//   Axios.defaults.baseURL = 'http://localhost:5019/' // Change with https://cscd490seniorprojectwebapp.azurewebsites.net/ if needed
+// } else {
   Axios.defaults.baseURL = 'https://cscd490seniorprojectwebapp.azurewebsites.net/'
-}
+//}
 
 // Provide the useDisplay to other components so that it can be used in testing.
 

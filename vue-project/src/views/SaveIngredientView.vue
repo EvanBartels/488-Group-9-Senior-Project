@@ -8,14 +8,19 @@
         <div>
   <Ingredients></Ingredients>
     </div>
+    <br />
+  <FooterFile></FooterFile>
   
   </template>
   
   <script>
   import Ingredients from '../components/Ingredients.vue';
+  import FooterFile from '../components/FooterFile.vue';
+
   export default {
     components: {
-        Ingredients
+        Ingredients,
+        FooterFile
     }
   }
   </script>

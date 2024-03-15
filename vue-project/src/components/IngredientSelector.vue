@@ -9,6 +9,7 @@
 </div>
     
     <div class="text-center">
+      <div :class="{ 'centered-container': true }">
       <v-menu
         open-on-hover
       >
@@ -28,20 +29,25 @@
             @click="selectIngredient(item)"
           >
             <v-list-item-title>{{ item.ingredientName }}</v-list-item-title>
-          </v-list-item> <!-- TODO: Carter or Travis, -->
+          </v-list-item>
         </v-list>
       </v-menu>
-      <div>
-    <v-card class="mx-auto" max-width="500">
-       <v-list> <!--TODO: Carter or Travis, enable this v-list, make a @click call on the v-list-item to call a method that removes the ingredient from the list-->
+      <div class="selectedlist">
+    <v-card class="mx-auto bg-info" style="width: 350px">
+       <v-list>
        <v-list-subheader>Selected Ingredients</v-list-subheader>
        <v-list-item v-for="(item, index) in selectedIngredients" :key="index" @click="removeIngredient(index)">
         <v-list-item-title v-text="item.ingredientName"></v-list-item-title>
         </v-list-item>
        </v-list>
       </v-card>
-      <v-btn @click="getDrinksFromIngredients()">Search Drinks</v-btn>
     </div>
+  <br />
+</div>
+<div style="margin-bottom: 20px;">
+      <v-btn @click="getDrinksFromIngredients()">Search Drinks</v-btn>
+</div>
+  
     <div>
       <v-card class="mx-auto" max-width="500">
        <v-list enabled>
@@ -55,6 +61,20 @@
     </div>
     <DrinkInfoDialog v-if="isDialogOpen" :drinkName="selectedDrink" :userEmail="userEmail" @close="closeDrinkInfoDialog" />
   </template>
+
+  <style>
+  .centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    margin: 0;
+  }
+  .selectedlist{
+    margin-left: 50px;
+  }
+  
+  </style>
   <script>
     import axios from 'axios'
     // const API_URL = "http://localhost:5019/"; //TODO azure web service url
