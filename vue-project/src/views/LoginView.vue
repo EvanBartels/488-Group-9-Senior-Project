@@ -1,12 +1,14 @@
 <template>
   <br>
-  <h1 class="text-h2" style="text-align: center; color: #0F4C75; font-family: sans-serif; font-weight: lighter;">Login</h1>
+  <h1 class="text-h2" style="text-align: center; font-family: sans-serif; font-weight: lighter;">Login</h1>
   <div class="d-flex align-center justify-center">
       
       </div> 
       <br>
       <div>
 <Login></Login>
+<br>
+<FooterFile></FooterFile>
   </div>
 
 </template>
