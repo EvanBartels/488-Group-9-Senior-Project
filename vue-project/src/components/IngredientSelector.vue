@@ -37,7 +37,10 @@
        <v-list>
        <v-list-subheader>Selected Ingredients</v-list-subheader>
        <v-list-item v-for="(item, index) in selectedIngredients" :key="index" @click="removeIngredient(index)">
-        <v-list-item-title v-text="item.ingredientName"></v-list-item-title>
+        <v-list-item-title class="text-left">
+          <v-icon small>mdi-close</v-icon>
+          {{ item.ingredientName }}
+        </v-list-item-title>
         </v-list-item>
        </v-list>
       </v-card>
