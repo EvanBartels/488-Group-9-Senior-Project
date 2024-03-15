@@ -42,7 +42,7 @@ export default {
           id: 2,
           name: "Evan Bartels",
           role: "Back End",
-          description: "I came up with the idea of a drink reccomendation system after seeing my mother work and run her own bar back in my home town. I figured this would be a good way to help people learn how to make drinkes, whether it's at home or as a bartending training tool. I also thought that it would be a good opportunity for me to develop and work on a website with a group, and learn about both front end tools such as Vue, and backend tools such as Microsoft Azure",
+          description: "I came up with the idea of a drink recommendation system after seeing my mother work and run her own bar back in my home town. I figured this would be a good way to help people learn how to make drinkes, whether it's at home or as a bartending training tool. I also thought that it would be a good opportunity for me to develop and work on a website with a group, and learn about both front end tools such as Vue, and backend tools such as Microsoft Azure",
           image: "/src/pics/Evan_Bartels.jpg", 
         },
         {
